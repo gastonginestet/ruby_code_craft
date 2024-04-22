@@ -28,9 +28,12 @@ Gem::Specification.new do |spec|
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
   spec.files = Dir.chdir(__dir__) do
     `git ls-files -z`.split("\x0").reject do |f|
-      (f == __FILE__) || f.match(%r{\A(?:(?:bin|test|spec|features)/|\.(?:git|circleci)|appveyor)})
+      f == File.basename(__FILE__) || # Exclude this gemspec file
+      f.end_with?('.gem') ||          # Exclude all .gem files
+      f.match(%r{\A(?:test|spec|features)/}) || # Exclude test, spec, and features directories
+      f.start_with?('.')              # Exclude all hidden files and directories
     end
-  end
+  end  
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]

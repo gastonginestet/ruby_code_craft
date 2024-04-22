@@ -27,7 +27,7 @@ module RubyCodeCraft
           puts message_to_bot
           puts "Bot's response:", :cyan
           puts "I'm a bot, I don't understand human language yet.", :yellow
-          puts "But this is what I'm going to generate.", :yellow
+          puts "But this is my default suggestion.", :yellow
           puts ""
           puts code_string, :yellow
           if (prompt.yes?('Do you want to generate the code?')) then
