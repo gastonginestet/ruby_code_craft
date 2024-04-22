@@ -4,6 +4,8 @@
 require "bundler/setup"
 require "ruby_code_craft"
 
+Bundler.require :default
+
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
@@ -11,5 +13,9 @@ require "ruby_code_craft"
 # require "pry"
 # Pry.start
 
-require "irb"
-IRB.start(__FILE__)
+# require "irb"
+# IRB.start(__FILE__)
+
+$LOAD_PATH.unshift(File.absolute_path("#{__dir__}/../lib"))
+
+Dry::CLI.new(RubyCodeCraft::Commands).call
